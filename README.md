@@ -1,13 +1,10 @@
-# -*- org -*-
-
-* Qingwen
+# Qingwen
 
 Translate the output from the Qingwen dictionary to a CSV format that
 can be read by ProVoc.
 
-* Running tests
+# Running tests
 
-#+BEGIN_SRC shell
-py.test -f test
-#+END_SRC
+    py.test -f test
+
 
