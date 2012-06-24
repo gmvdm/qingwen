@@ -10,25 +10,30 @@ def parse_definitions(val):
 
     res = re.sub(u'[①②③④⑤⑥⑦⑧⑨]+', '|', val)
     vals = map((lambda s: s.strip()), res.split('|'))
-    return vals[1:9]
+    if len(vals[0]) == 0:
+        return vals[1:9]
+    else:
+        return vals[0:9]
 
 def parse(val):
-    re_QW = re.compile('^([\w]+)\[.*\]\s+(\w+)\s+(.*)', re.UNICODE)
+    re_QW = re.compile('^([\w]+)\[.*\]\s+(\S+)\s+(.*)', re.UNICODE)
     res = re.match(re_QW, val)
     if res is None:
         return {}
 
+    print res.group(3)
     definitions = parse_definitions(res.group(3))
+    print definitions
     return {'hanzi': res.group(1), 'pinyin': res.group(2), 'defs': definitions}
 
-def format_csv_entry(vals):
+def format_output_line(vals):
     if len(vals) < 3:
         return ''
 
     defns = ' / '.join(vals.get('defs', ''))
-    return unicode(','.join([vals.get('hanzi', ''),
-                             vals.get('pinyin', ''),
-                             defns]))
+    return u'%s\t%s\t%s' % (vals.get('hanzi', ''),
+                              defns,
+                              vals.get('pinyin', ''))
 
 def process_file(in_filename, out_filename):
     with open(out_filename, 'w') as out_file:
@@ -36,7 +41,7 @@ def process_file(in_filename, out_filename):
             for l in in_file:
                 res = parse(l.decode('utf8'))
                 if len(res) >= 3:
-                    out_line = format_csv_entry(res)
+                    out_line = format_output_line(res)
                     out_file.write(out_line.encode('utf-8'))
                     out_file.write('\n')
 
