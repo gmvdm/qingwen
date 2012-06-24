@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+# Copyright (c) 2012 Geoff Wilson
 
 import qingwen
 import unittest
+
 
 class TestParser(unittest.TestCase):
     def test_parse_empty_defn(self):
@@ -49,6 +51,7 @@ class TestFormatter(unittest.TestCase):
     def test_multi(self):
         res = {"hanzi": "H", "pinyin": "P", "defs": ['D1', 'D2']}
         self.assertEqual('H\tD1 / D2\tP', qingwen.format_output_line(res))
+
 
 if __name__ == '__main__':
     unittest.main()

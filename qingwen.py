@@ -1,10 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+# Copyright (c) 2012 Geoff Wilson
 
 import re
 import sys
 
+
 def parse_definitions(val):
+    """Given a definition string, return an array of definitions"""
     if len(val) == 0:
         return []
 
@@ -15,7 +18,9 @@ def parse_definitions(val):
     else:
         return vals[0:9]
 
+
 def parse(val):
+    """Given a unicode string from Qingwen, parse main parts"""
     re_QW = re.compile('^([\w]+)\[.*\]\s+(\S+)\s+(.*)', re.UNICODE)
     res = re.match(re_QW, val)
     if res is None:
@@ -26,14 +31,17 @@ def parse(val):
     print definitions
     return {'hanzi': res.group(1), 'pinyin': res.group(2), 'defs': definitions}
 
+
 def format_output_line(vals):
+    """Given a dict, produce a tab separated output line"""
     if len(vals) < 3:
         return ''
 
     defns = ' / '.join(vals.get('defs', ''))
     return u'%s\t%s\t%s' % (vals.get('hanzi', ''),
-                              defns,
-                              vals.get('pinyin', ''))
+                            defns,
+                            vals.get('pinyin', ''))
+
 
 def process_file(in_filename, out_filename):
     with open(out_filename, 'w') as out_file:
@@ -45,8 +53,10 @@ def process_file(in_filename, out_filename):
                     out_file.write(out_line.encode('utf-8'))
                     out_file.write('\n')
 
+
 def help_text(name):
     return "usage: %s [infile] [outfile]" % name
+
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
