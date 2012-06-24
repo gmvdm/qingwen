@@ -26,9 +26,7 @@ def parse(val):
     if res is None:
         return {}
 
-    print res.group(3)
     definitions = parse_definitions(res.group(3))
-    print definitions
     return {'hanzi': res.group(1), 'pinyin': res.group(2), 'defs': definitions}
 
 
