@@ -39,6 +39,9 @@ class TestParser(unittest.TestCase):
         res = qingwen.parse(u'一切[一切] yīqiè everything')
         self.assertTrue('everything' in res['defs'])
 
+    def test_extra_brackets(self):
+        res = qingwen.parse(u'加油[加油] jiāyóu ① to add oil ② to top up with gas ③ to refuel ④ to accelerate ⑤ abbr. for 加大油門|加大油门[jia1 da4 you2 men2] ⑥ to step on the gas ⑦ fig. to make an extra effort ⑧ fig. to cheer sb on')
+        self.assertEqual(u'jiāyóu', res['pinyin'])
 
 class TestFormatter(unittest.TestCase):
     def test_empty(self):

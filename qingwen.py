@@ -21,7 +21,7 @@ def parse_definitions(val):
 
 def parse(val):
     """Given a unicode string from Qingwen, parse main parts"""
-    re_QW = re.compile('^([\w]+)\[.*\]\s+(\S+)\s+(.*)', re.UNICODE)
+    re_QW = re.compile('^([\w]+)\[[^\]]*\]\s+(\S+)\s+(.*)', re.UNICODE)
     res = re.match(re_QW, val)
     if res is None:
         return {}
