@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2012 Geoff Wilson
 
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 
 setup(name='qingwen',
@@ -10,6 +10,7 @@ setup(name='qingwen',
       author='Geoff Wilson',
       author_email='gmwils@gmail.com',
       version='0.1',
-      packages=['qingwen'],
+      packages=find_packages(),
       scripts=['bin/qingwen'],
+      license = 'MIT',
       )
