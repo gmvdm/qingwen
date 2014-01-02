@@ -1,8 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright (c) 2012 Geoff Wilson
 
-from setuptools import setup, find_packages
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+
+
+packages = [
+    'qingwen',
+    ]
+
+
+requires = []
 
 
 setup(name='qingwen',
@@ -10,7 +20,8 @@ setup(name='qingwen',
       author='Geoff Wilson',
       author_email='gmwils@gmail.com',
       version='0.1',
-      packages=find_packages(),
+      packages=packages,
+      install_requires=requires,
       scripts=['bin/qingwen'],
       license = 'MIT',
       )
